@@ -1,0 +1,4 @@
+CREATE USER 'jovyan'@'localhost' IDENTIFIED BY '3103jV1';
+GRANT ALL PRIVILEGES ON *.* TO 'jovyan'@'localhost';
+CREATE USER 'student'@'%' IDENTIFIED BY '8070stud';
+GRANT ALL PRIVILEGES ON *.* TO 'student'@'%';
