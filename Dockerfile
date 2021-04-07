@@ -135,6 +135,8 @@ RUN conda install -c r r-irkernel && \
     conda install -y -c anaconda psycopg2 && \
     conda install -y -c conda-forge pgspecial && \
     conda install -c conda-forge jupyter_contrib_nbextensions && \
+    conda install -c conda-forge jupyterlab_execute_time  && \
+    pip install postgres_kernel && \
     fix-permissions $HOME && \
     fix-permissions $CONDA_DIR
 
@@ -185,28 +187,23 @@ RUN conda install --quiet --yes 'tini=0.18.0' && \
     fix-permissions $HOME
 
 # add files
-ADD mysql_config.json $HOME/.local/config/mysql_config.json
+ADD --chown=$NB_USER:$NB_GID mysql_config.json $HOME/.local/config/mysql_config.json
 ADD imshow.m /usr/share/octave/5.2.0/m/image/
 ADD jupyter_notebook_config.py /etc/jupyter/
 ADD start.sh /usr/local/bin/
 ADD start-notebook.sh /usr/local/bin/
-ADD mysql-init $HOME/mysql/
-ADD start_mysql.sh $HOME/mysql/
-ADD start_postgresql.sh $HOME/postgresql/
+ADD --chown=$NB_USER:$NB_GID mysql-init $HOME/mysql/
+ADD --chown=$NB_USER:$NB_GID start_mysql.sh $HOME/mysql/
+ADD --chown=$NB_USER:$NB_GID start_postgresql.sh $HOME/postgresql/
 ADD convert_to_html.sh /usr/local/bin/
+ADD --chown=$NB_USER:$NB_GID tracker.jupyterlab-settings $HOME/.jupyter/lab/user-settings/@jupyterlab/notebook-extension/
 
-RUN mkdir -p $HOME/.local/config/ && \
-    chmod +r $HOME/.local/config/mysql_config.json && \
-    chmod +r /usr/share/octave/5.2.0/m/image/imshow.m && \
+RUN chmod +r /usr/share/octave/5.2.0/m/image/imshow.m && \
     fix-permissions /etc/jupyter/ && \
     chmod +rx /usr/local/bin/start.sh && \
     chmod +rx /usr/local/bin/start-notebook.sh && \
-    mkdir -p $HOME/mysql && \
-    chmod +r $HOME/mysql/mysql-init && \
-    chmod +rx $HOME/mysql/start_mysql.sh && \
-    mkdir -p $HOME/postgresql && \
-    chmod +rx $HOME/postgresql/start_postgresql.sh && \
-    chown -R $NB_USER:$NB_UID $HOME/postgresql && \
+    chmod +x $HOME/mysql/start_mysql.sh && \
+    chmod +x $HOME/postgresql/start_postgresql.sh && \
     chmod +rx /usr/local/bin/convert_to_html.sh
 
 # MySQL kernel, pandas required for mysql kernel
