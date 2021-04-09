@@ -12,5 +12,6 @@ Docker image for a jupyter-notebook- / jupyter-lab-server with kernels supportin
 
 for education purposes.
 
-Execute using mybinder:
+Lauch lab in binderhub:
+
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ncc-74205/jupyter_edu_2021/HEAD?urlpath=lab/tree/examples)
