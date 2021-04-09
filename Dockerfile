@@ -198,6 +198,10 @@ ADD --chown=$NB_USER:$NB_GID start_postgresql.sh $HOME/postgresql/
 ADD convert_to_html.sh /usr/local/bin/
 ADD --chown=$NB_USER:$NB_GID tracker.jupyterlab-settings $HOME/.jupyter/lab/user-settings/@jupyterlab/notebook-extension/
 
+# add example files
+ADD --chown=$NB_USER:$NB_GID MySQLWithJavaDemo.ipynb $HOME/examples/
+ADD --chown=$NB_USER:$NB_GID PostgreSQLWithJava.ipynb $HOME/examples/
+
 RUN chmod +r /usr/share/octave/5.2.0/m/image/imshow.m && \
     fix-permissions /etc/jupyter/ && \
     chmod +rx /usr/local/bin/start.sh && \
