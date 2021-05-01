@@ -14,4 +14,4 @@ for education purposes.
 
 Lauch lab in binderhub:
 
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/ncc-74205/jupyter_edu_2021/HEAD?urlpath=lab/tree/examples)
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/riturajsingh2015/jupyter_edu_2021/main)
